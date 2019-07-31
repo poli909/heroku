@@ -1,0 +1,5 @@
+<form action="{% url 'result' %}" method="POST"> 
+    {% csrf_token %}
+    <input type="text" name="keyword">
+    <input type="submit" value="제출">
+</form> 

@@ -1,0 +1,12 @@
+
+{% for group in groups %}
+    <a href="{% url 'detail' group.id%}">{{ group.id }}. {{ group.name }}</a> 
+    <a href="{% url 'edit' group.id %}">편집</a>
+    <a href="javascript:{document.getElementById('delete').submit()}">삭제</a>
+    <form action="{% url 'delete' group.id %}" id="delete" method="POST">
+        {% csrf_token %}
+        <input type="hidden">
+    </form>
+{% endfor %}
+
+<a href="{% url 'create' %}">동아리 등록</a>

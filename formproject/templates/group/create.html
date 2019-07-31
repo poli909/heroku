@@ -1,0 +1,10 @@
+<!-- templates/create.html -->
+<a href="{% url 'home'%}">목록</a>
+
+<form action="{% url 'create'%}" method="POST">
+    {% csrf_token %}
+    <ul>
+        {{form.as_ul}}
+    </ul>
+    <input type="submit" value="제출">
+</form>

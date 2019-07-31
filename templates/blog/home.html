@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block body %}
+
+    {% for blog in posts%}
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">{{blog.title}}</h2>
+                <h6 class="card-subtitle mb-2 text-muted">{{blog.date}}</h6>
+                <p class="card-text">{{blog.summary}}</p>
+                <a href="{% url 'detail' blog.id%}" class="card-link">...more</a>
+                <a href="{% url 'edit' blog.id %}" class="card-link">수정하기</a>
+                <a href="{% url 'delete' blog.id %}" class="card-link">삭제</a>
+            </div>
+        </div>
+        <br><br>
+    </div>
+    {% endfor %}
+
+    <div class="container">
+        <!-- 이전 페이지가 있다면 -->
+        {%  if posts.has_previous %}
+        <a href="?page=1">First</a>
+        <a href="?page={{posts.previous_page_number}}">Previous</a>
+        {% endif %}
+
+        <!-- 현재 페이지 번호 -->
+        <span>{{posts.number}}</span> 
+        <span>of</span>
+        <!-- 총 페이지 번호 -->
+        <span>{{posts.paginator.num_pages}}</span>
+
+        <!-- 다음 페이지가 있다면 -->
+        {%if posts.has_next%}
+        <a href="?page={{posts.next_page_number}}">Next</a>
+        <a href="?page={{posts.paginator.num_pages}}">Last</a>
+        {%endif%}
+    </div>
+    
+{% endblock %}
